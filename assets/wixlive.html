@@ -1,0 +1,152 @@
+<div class="carousel">
+    <div class="slide active">
+        <img src="/assets/images/slide-1.webp" alt="Image 1" />
+        <div class="caption">
+            <p class="testimonial">
+                "I worked with Mesh over the summer on a large group shoot for 45 women. Before the shoot, he was
+                extremely responsive and professional."
+            </p>
+            <h3 class="testimonialName">-Revae Tharps</h3>
+        </div>
+    </div>
+    <div class="slide">
+        <img src="/assets/images/slide-2.webp" alt="Image 2" />
+        <div class="caption">
+            <p class="testimonial">
+                “Mesh did a great job! I am a fitness trainer (super awkward in pictures) and Mesh not only made me feel
+                comfortable but he had a lot of great ideas and was able to capture some really awesome moments.”
+            </p>
+            <h3 class="testimonialName">-Brittney Lankford</h3>
+        </div>
+    </div>
+    <div class="slide">
+        <img src="/assets/images/slide-3.webp" alt="Image 3" />
+        <div class="caption">
+            <p class="testimonial">
+                “Mesh helped me out with a fitness photoshoot for my business. He was so easy to work with, timely,
+                professional and I was happy he was so quick to respond with answers to my questions leading up to my
+                shoot”
+            </p>
+            <h3 class="testimonialName">-Heather Patton</h3>
+        </div>
+    </div>
+
+    <div class="carousel-dots">
+        <span class="dot active" data-slide="0"></span>
+        <span class="dot" data-slide="1"></span>
+        <span class="dot" data-slide="2"></span>
+    </div>
+</div>
+
+<style>
+    @font-face {
+        font-family: RalewayImport;
+        src: url(https://static.wixstatic.com/ufonts/59f25f_2fa8f0db51b643ba8954f3118a83d0a9/woff2/file.woff2);
+    }
+
+    body {
+        margin: 0;
+        font-family: sans-serif;
+        background: #000;
+    }
+
+    .carousel {
+        position: relative;
+        width: 100%;
+        max-width: 900px;
+        height: 500px;
+        margin: 50px auto;
+        overflow: hidden;
+    }
+
+    .slide {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: opacity 2.5s ease-in-out;
+    }
+
+    .slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .slide .caption {
+        position: absolute;
+        width: 90%;
+        bottom: 10%;
+        left: 2.7%;
+        color: #fff;
+        text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+        background: rgba(0, 0, 0, 0.6);
+        padding: 20px;
+        border-radius: 8px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .slide .testimonialName {
+        color: #A2BFFE;
+        font-family: RalewayImport;
+        font-weight: 500;
+        margin-top: 0;
+    }
+
+    .slide .testimonial {
+        font-family: RalewayImport;
+        font-weight: 300;
+        text-align: center;
+        font-size: 1.2em;
+        margin-bottom: 1%;
+    }
+
+    .slide.active {
+        opacity: 1;
+        z-index: 1;
+    }
+
+    .carousel-dots {
+        position: absolute;
+        bottom: 15px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+</style>
+
+<script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.dot');
+    const totalSlides = slides.length;
+    let interval = setInterval(nextSlide, 8000);
+
+    function showSlide(index) {
+        slides.forEach((slide, i) => {
+            slide.classList.toggle('active', i === index);
+            dots[i].classList.toggle('active', i === index);
+        });
+        currentSlide = index;
+    }
+
+
+
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % totalSlides;
+        showSlide(currentSlide);
+    }
+
+    // Dot click event
+    dots.forEach(dot => {
+        dot.addEventListener('click', () => {
+            clearInterval(interval); // Stop auto-play on manual selection
+            showSlide(parseInt(dot.dataset.slide));
+            interval = setInterval(nextSlide, 4000); // Restart auto-play
+        });
+    });
+
+</script>
